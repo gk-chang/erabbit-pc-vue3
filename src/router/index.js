@@ -1,11 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+const Layout = () => import('@/views/Layout')
+const Home = () => import('@/views/home/index')
+
+
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: Layout,
+    children: [
+          { path: '/', component: Home }
+        ]
   },
   {
     path: '/about',
@@ -18,7 +25,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  // history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes
 })
 
